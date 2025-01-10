@@ -1,0 +1,24 @@
+[
+    {
+        "id": 3,
+        "title": "te",
+        "description": "negro",
+        "price": 1,
+        "img": [
+            "https://example.com/imagen1.jpg"
+        ],
+        "code": "12",
+        "stock": 11
+    },
+    {
+        "id": 4,
+        "title": "hojas",
+        "description": "blanxas",
+        "price": 1,
+        "img": [
+            "https://example.com/imagen1.jpg"
+        ],
+        "code": "112",
+        "stock": 11
+    }
+]
