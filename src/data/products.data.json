@@ -1,24 +1,20 @@
 [
-    {
-        "id": 3,
-        "title": "te",
-        "description": "negro",
-        "price": 1,
-        "img": [
-            "https://example.com/imagen1.jpg"
-        ],
-        "code": "12",
-        "stock": 11
-    },
-    {
-        "id": 4,
-        "title": "hojas",
-        "description": "blanxas",
-        "price": 1,
-        "img": [
-            "https://example.com/imagen1.jpg"
-        ],
-        "code": "112",
-        "stock": 11
-    }
+  {
+    "id": 14,
+    "title": "OLA",
+    "description": "D1D",
+    "price": "12",
+    "img": "2E1",
+    "code": "11D321",
+    "stock": "122"
+  },
+  {
+    "id": 15,
+    "title": "qdw3d",
+    "description": "d1qd",
+    "price": "12",
+    "img": "[",
+    "code": "12ed12",
+    "stock": "12"
+  }
 ]

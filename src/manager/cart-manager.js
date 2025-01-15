@@ -36,23 +36,46 @@ class cartmanager{
     async getcCartById(cartId){
         const cart = this.carts.find(c => c.id === cartId);
         if (!cart){
-            throw new Error('no un cart con ese id')
+            throw new Error('no existe un cart con ese id')
         }
         return cart;
     }
-    async addProductToCart(cartId, productId, quantity = 1){
+    async addProductToCart(cartId, productId, quantity = 1) {
         const carrito = await this.getcCartById(cartId);
-        const existeProducto = carrito.products.find(p => p.product === productId);
-        if (existeProducto){
-            existeProducto.quantity += quantity;
 
+        
+        const productos = await fs.readFile('./src/data/products.data.json', 'utf-8');
+        const listaProductos = JSON.parse(productos);
+        const producto = listaProductos.find(p => p.id === productId);
+    
+        if (!producto) {
+            throw new Error(`El producto con ID ${productId} no existe.`);
         }
-        else{
-            carrito.products.push({product: productId, quantity});
+    
+        if (producto.stock < quantity) {
+            throw new Error(
+                `Stock insuficiente para el producto con ID ${productId}. Disponible: ${producto.stock}`
+            );
         }
+    
+        const existeProducto = carrito.products.find(p => p.product === productId);
+        if (existeProducto) {
+            if (producto.stock < existeProducto.quantity + quantity) {
+                throw new Error(
+                    `Stock insuficiente para incrementar la cantidad del producto con ID ${productId}. Disponible: ${producto.stock}`
+                );
+            }
+            existeProducto.quantity += quantity;
+        } else {
+            carrito.products.push({ product: productId, quantity });
+        }
+        producto.stock -= quantity;
+        await fs.writeFile('./src/data/products.data.json', JSON.stringify(listaProductos, null, 2));
+    
         await this.saveCarts();
         return carrito;
     }
+    
 }
 
 export default cartmanager;

@@ -7,11 +7,13 @@ class ProductManager {
     constructor(path) {
         this.products = []; 
         this.path = path; 
+        this.initializeId();
 
     }
 // agregar productos
     async addProduct({title, description, price, img, code, stock}) {
         const arrayProductos = await this.leerArchivo(); 
+        
 
 
         if(!title || !description || !price || !img || !code || !stock ) {
@@ -106,8 +108,10 @@ async deleteProductById(id) {
     await this.guardarArchivo(arrayProductos); 
     return true;
 }
-
-
+async initializeId() {
+    const arrayProductos = await this.leerArchivo();
+    ProductManager.ultId = arrayProductos.length > 0 ? Math.max(...arrayProductos.map(p => p.id)) : 0;
+}
 }
 
 export default ProductManager;
